@@ -6,13 +6,15 @@ body{
     box-sizing: border-box;
     margin: 0;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
-    /* background-color: rgb(19, 19, 19); */
+    background-color: rgb(19, 19, 19);
+    height: 100vh;
 }
 
 .header{
     display: flex;
     justify-content: space-between;
     background-color: rgb(42, 42, 42);
+    align-items: center;
 
 }
 
@@ -25,4 +27,26 @@ body{
 .logo h1{
     -webkit-text-stroke: 1px;
     -webkit-text-stroke-color: rgb(42, 42, 42);
+}
+
+.gameContainer{
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: center;
+    gap: 1.2rem;
+    align-content: center;
+    padding-top: 5%;
+}
+
+.square{
+    height: 150px;
+    width: 150px;
+    border: solid rgb(133, 133, 133);
+    border-radius: 15px;
+}
+
+.square:hover{
+    cursor: pointer;
+    /* zoom: 99%; */
+    box-shadow: 5px 5px 25px rgb(244, 184, 20),-5px -5px 25px rgb(244, 184, 20);
 }
