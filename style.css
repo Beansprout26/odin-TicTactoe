@@ -33,12 +33,13 @@ body{
     display: grid;
     grid-template-columns: repeat(3, auto);
     justify-content: center;
-    gap: 1.2rem;
+    gap: 1.5rem;
     align-content: center;
     padding-top: 5%;
 }
 
 .square{
+    display: flex;
     height: 150px;
     width: 150px;
     border: solid rgb(133, 133, 133);
@@ -49,4 +50,5 @@ body{
     cursor: pointer;
     /* zoom: 99%; */
     box-shadow: 5px 5px 25px rgb(244, 184, 20),-5px -5px 25px rgb(244, 184, 20);
+    
 }
