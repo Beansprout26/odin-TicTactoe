@@ -1,72 +1,83 @@
+
+
 const playerOne = {
     name: 'Player One',
     marker: "X",
 
     //here I will add logic to handle this players click events, styling colors and point tally.
-    playerOneTurn: function(){
-        document.querySelectorAll('.square').forEach(square =>{
-            square.addEventListener('click',() => {
-                if(!square.textContent){
+    playerOneTurn: function() {
+        document.querySelectorAll('.square').forEach(square => {
+            square.addEventListener('click', () => {
+                if (!square.textContent && gameBoard.currentPlayer === playerOne) {
                     square.textContent = this.marker;
-                }console.log(this.marker);
-                square.setAttribute('style', 'box-shadow: 5px 5px 25px rgb(107, 253, 255),-5px -5px 25px rgb(107, 253, 255);')
-                // const h1 = document.createElement("h1");
-                // h1.textContent = "X";
-                // square.appendChild(h1);
+                    console.log(this.marker);
 
-                square.style.color = 'rgb(107, 253, 255)';
-                square.style.justifyContent = 'center';
-                square.style.alignItems = 'center';
-                square.style.fontSize = '5rem';
+                    square.setAttribute('style', 'box-shadow: 5px 5px 25px rgb(245, 100, 194),-5px -5px 25px rgb(245, 100, 194);');
+                    square.style.color = 'rgb(245, 100, 194)';
+                    square.style.justifyContent = 'center';
+                    square.style.alignItems = 'center';
+                    square.style.fontSize = '5rem';
+
+                    gameBoard.nextTurn(); // Switch turn
+                    gameLogic.winner();
+                }
             });
-        })
-
-
-        // console.log(`${this.name} and ${this.marker}`);
+        });
     }
-};playerOne.playerOneTurn();
+};
+
+
 
 
 const playerTwo = {
     name: "Player Two",
     marker: "O",
     //here I will add logic to handle this players click events, styling colors and point tally.
-    playerTwoTurn: function(){
-        document.querySelectorAll('.square').forEach(square =>{
-            square.addEventListener('click',() => {
-                if(!square.textContent){
+    playerTwoTurn: function() {
+        document.querySelectorAll('.square').forEach(square => {
+            square.addEventListener('click', () => {
+                if (!square.textContent && gameBoard.currentPlayer === playerTwo) {
                     square.textContent = this.marker;
-                }console.log(this.marker);
-                square.setAttribute('style', 'box-shadow: 5px 5px 25px rgb(245, 100, 194),-5px -5px 25px rgb(245, 100, 194);')
-    
+                    console.log(this.marker);
+
+                    square.setAttribute('style', 'box-shadow: 5px 5px 25px rgb(107, 253, 255),-5px -5px 25px rgb(107, 253, 255);');
+                    square.style.color = 'rgb(107, 253, 255)';
+                    square.style.justifyContent = 'center';
+                    square.style.alignItems = 'center';
+                    square.style.fontSize = '5rem';
 
 
-                square.style.color = 'rgb(245, 100, 194)';
-                square.style.justifyContent = 'center';
-                square.style.alignItems = 'center';
-                square.style.fontSize = '5rem';
+                    gameBoard.nextTurn();
+                    gameLogic.winner();
+                }
             });
-        })
-
-
-        // console.log(`${this.name} and ${this.marker}`);
+        });
     }
-};playerTwo.playerTwoTurn();
-
+};
 
 
 //handle turns and defining player moves
 const gameBoard = {
     game: [],
-    currentPlayer: playerOne,
-    // nextTurn: function(){
-    //     if(currentPlayer === playerOne){
-    //         playerOne.playerOneTurn();
-    //     }else{
-    //         playerTwo.playerTwoTurn();
-    //     }this.nextTurn();
-    // }
+    currentPlayer: playerTwo,
+
+    nextTurn: function() {
+        if (this.currentPlayer === playerOne) {
+            this.currentPlayer = playerTwo;
+            this.currentPlayer.playerTwoTurn();
+        } else {
+            this.currentPlayer = playerOne;
+            this.currentPlayer.playerOneTurn();
+        }
+    }
 };
+gameBoard.nextTurn();
+
+
+
+
+
+
 
 //object for all winning patterns and will include winning logic
 const gameLogic = {
@@ -80,9 +91,17 @@ const gameLogic = {
         [3,6,9],
         [3,5,7],
         [1,5,9]
-    ]
+    ],
 
-};
+    winner: function(){
+        if(playerOne.marker === this.winningPatterns){
+            console.log('Winner playerOne');
+        }else if(playerTwo.marker === this.winningPatterns){
+            console.log('Winner playerTwo');
+        }
+    }
+
+}; gameLogic.winner();
 
 
 
