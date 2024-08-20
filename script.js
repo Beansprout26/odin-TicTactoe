@@ -18,8 +18,11 @@ const playerOne = {
                     square.style.alignItems = 'center';
                     square.style.fontSize = '5rem';
 
-                    gameBoard.nextTurn(); // Switch turn
-                    gameLogic.winner();
+                    if(!gameLogic.winner()){
+                        gameBoard.nextTurn(); // Switch turn
+                    }
+                    
+                    
                 }
             });
         });
@@ -47,8 +50,9 @@ const playerTwo = {
                     square.style.fontSize = '5rem';
 
 
-                    gameBoard.nextTurn();
-                    gameLogic.winner();
+                    if(!gameLogic.winner()){
+                        gameBoard.nextTurn(); // Switch turn
+                    }
                 }
             });
         });
@@ -77,31 +81,35 @@ gameBoard.nextTurn();
 
 
 
-
+const squares = document.querySelectorAll('.square');
 
 //object for all winning patterns and will include winning logic
 const gameLogic = {
 
     winningPatterns: [
-        [1,2,3],
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
         [1,4,7],
-        [4,5,6],
-        [7,8,9],
         [2,5,8],
-        [3,6,9],
-        [3,5,7],
-        [1,5,9]
+        [6,4,2],
+        [0,4,8]
     ],
 
-    winner: function(){
-        if(playerOne.marker === this.winningPatterns){
-            console.log('Winner playerOne');
-        }else if(playerTwo.marker === this.winningPatterns){
-            console.log('Winner playerTwo');
+    
+    winner: function(currentPlayer){
+        for(let i = 0; i < this.winningPatterns.length; i++){
+            const [a,b,c] = this.winningPatterns[i];
+            if(squares[a].textContent === gameBoard.currentPlayer.marker && squares[b].textContent === gameBoard.currentPlayer.marker && squares[c].textContent === gameBoard.currentPlayer.marker){
+                console.log(`${gameBoard.currentPlayer.name} is the winner!`);
+                return true;
+                
+            }
+            
         }
-    }
-
-}; gameLogic.winner();
+        return false;
+    }};
 
 
 
