@@ -18,11 +18,14 @@ const playerOne = {
                     square.style.alignItems = 'center';
                     square.style.fontSize = '5rem';
 
-                    if(!gameLogic.winner()){
-                        gameBoard.nextTurn(); // Switch turn
+                    if (!gameLogic.winner()) {
+                        if (gameLogic.checkDraw()) {
+                            console.log('It is a Draw!');
+                        } else {
+                            gameBoard.nextTurn(); // Switch turn
+                        }
+                    
                     }
-                    
-                    
                 }
             });
         });
@@ -50,8 +53,13 @@ const playerTwo = {
                     square.style.fontSize = '5rem';
 
 
-                    if(!gameLogic.winner()){
-                        gameBoard.nextTurn(); // Switch turn
+                    if (!gameLogic.winner()) {
+                        if (gameLogic.checkDraw()) {
+                            console.log('It is a Draw!');
+                        } else {
+                            gameBoard.nextTurn(); // Switch turn
+                        }
+
                     }
                 }
             });
@@ -109,7 +117,18 @@ const gameLogic = {
             
         }
         return false;
-    }};
+    },
+
+    checkDraw: function() {
+        // Check if all squares are filled
+        return [...squares].every(square => square.textContent);
+    }
+
+
+   
+};
+
+
 
 
 
